@@ -7,11 +7,12 @@ part 'product_state.dart';
 class ProductCubit extends Cubit<ProductState> {
   ProductCubit() : super(ProductLoading());
   ProductRepo productRepo = ProductRepo();
+  List<ProductModel> products = [];
   getProducts() async {
     try {
       await Future.delayed(Duration(seconds: 2));
       // Fetch products from repository
-      final products = await productRepo.fetchProducts();
+      products = await productRepo.fetchProducts();
       emit(ProductLoaded(products));
     } catch (e) {
       emit(ProductFailure(e.toString()));
