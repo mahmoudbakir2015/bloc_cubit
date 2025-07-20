@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:bloc_cubit/cubit/counter_cubit.dart';
+import 'package:bloc_cubit/bloc/counter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CounterCubit(),
+      create: (context) => CounterBloc(),
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
@@ -44,7 +44,7 @@ class MyHomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text('You have pushed the button this many times:'),
-            BlocBuilder<CounterCubit, CounterState>(
+            BlocBuilder<CounterBloc, CounterState>(
               builder: (context, state) {
                 return Text(
                   state.count.toString(),
@@ -60,8 +60,8 @@ class MyHomePage extends StatelessWidget {
         children: [
           FloatingActionButton(
             onPressed: () {
-              // This line is incorrect, should be CounterCubit
-              context.read<CounterCubit>().increment();
+              // This line is incorrect, should be CounterBloc
+              context.read<CounterBloc>().add(CounterIncrement());
             },
             tooltip: 'Increment',
             child: const Icon(Icons.add),
@@ -69,7 +69,7 @@ class MyHomePage extends StatelessWidget {
           const SizedBox(height: 10), // Add some space between buttons
           FloatingActionButton(
             onPressed: () {
-              context.read<CounterCubit>().decrement();
+              context.read<CounterBloc>().add(CounterDecrement());
             },
             tooltip: 'decrement',
             child: const Icon(Icons.remove),
