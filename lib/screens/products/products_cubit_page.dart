@@ -14,7 +14,7 @@ class ProductsCubitPage extends StatelessWidget {
     log('Parent');
     return Scaffold(
       appBar: AppBar(title: Text(title)),
-      body: BlocBuilder<ProductCubit, ProductState>(
+      body: BlocBuilder<ProductCubit, ProductStateCubit>(
         builder: (context, state) {
           if (state is ProductLoading) {
             return const Center(child: CircularProgressIndicator());

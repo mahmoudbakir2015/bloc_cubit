@@ -1,10 +1,9 @@
 import 'package:bloc_cubit/model/product_model.dart';
 import 'package:bloc_cubit/repo/product_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 part 'product_state_cubit.dart';
 
-class ProductCubit extends Cubit<ProductState> {
+class ProductCubit extends Cubit<ProductStateCubit> {
   ProductCubit() : super(ProductLoading());
   ProductRepo productRepo = ProductRepo();
   List<ProductModel> products = [];
