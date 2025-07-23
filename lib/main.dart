@@ -1,9 +1,11 @@
 import 'package:bloc_cubit/controller/bloc/to_do/to_do_bloc.dart';
 import 'package:bloc_cubit/screens/to_do/to_do_bloc_page.dart';
+import 'package:bloc_cubit/utils/observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
+  Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 }
 
