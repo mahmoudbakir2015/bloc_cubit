@@ -36,6 +36,7 @@ dependencies:
   uuid: ^4.5.1
   hydrated_bloc: ^10.1.1
   path_provider: ^2.0.14
+  equatable: ^2.0.7
 
 dev_dependencies:
 

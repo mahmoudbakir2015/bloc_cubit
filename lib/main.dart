@@ -1,5 +1,5 @@
-import 'package:bloc_cubit/controller/bloc/products/products_bloc.dart';
-import 'package:bloc_cubit/screens/products/products_bloc_page.dart';
+import 'package:bloc_cubit/controller/bloc/to_do/to_do_bloc.dart';
+import 'package:bloc_cubit/screens/to_do/to_do_bloc_page.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:bloc_cubit/utils/observer.dart';
 import 'package:flutter/material.dart';
@@ -23,14 +23,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ProductsBloc()..add(FetchProducts()),
+      create: (context) => ToDoBloc(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         ),
-        home: const ProductsBlocPage(title: 'Products'),
+        home: const ToDoBlocPage(),
       ),
     );
   }

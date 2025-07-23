@@ -1,8 +1,10 @@
 part of 'to_do_cubit.dart';
 
-sealed class ToDoState {
+sealed class ToDoState extends Equatable {
   final List<TaskModel> tasks;
   const ToDoState(this.tasks);
+  @override
+  List<Object?> get props => [tasks];
 }
 
 final class ToDoInitial extends ToDoState {
@@ -10,5 +12,5 @@ final class ToDoInitial extends ToDoState {
 }
 
 final class UpdateTask extends ToDoState {
-  UpdateTask(super.tasks);
+  const UpdateTask(super.tasks);
 }

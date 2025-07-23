@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 part 'counter_state_bloc.dart';

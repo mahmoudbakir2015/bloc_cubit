@@ -1,8 +1,11 @@
 import 'package:bloc_cubit/model/task_model.dart';
+import 'package:equatable/equatable.dart';
 
-sealed class ToDoStateBloc {
+sealed class ToDoStateBloc extends Equatable {
   final List<TaskModel> tasks;
   const ToDoStateBloc(this.tasks);
+  @override
+  List<Object?> get props => [tasks];
 }
 
 final class ToDoInitial extends ToDoStateBloc {
@@ -10,5 +13,5 @@ final class ToDoInitial extends ToDoStateBloc {
 }
 
 final class UpdateTask extends ToDoStateBloc {
-  UpdateTask(super.tasks);
+  const UpdateTask(super.tasks);
 }
