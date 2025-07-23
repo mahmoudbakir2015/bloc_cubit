@@ -3,10 +3,10 @@ import 'package:bloc_cubit/controller/bloc/to_do/to_do_event.dart';
 import 'package:bloc_cubit/controller/bloc/to_do/to_do_state_bloc.dart';
 import 'package:bloc_cubit/model/task_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:uuid/uuid.dart';
 
-class ToDoBloc extends Bloc<ToDoEvent, ToDoStateBloc> {
+class ToDoBloc extends HydratedBloc<ToDoEvent, ToDoStateBloc> {
   ToDoBloc() : super(ToDoInitial()) {
     on<AddTaskEvent>((event, emit) {
       TaskModel task = TaskModel(
@@ -45,4 +45,16 @@ class ToDoBloc extends Bloc<ToDoEvent, ToDoStateBloc> {
     });
   }
   TextEditingController taskController = TextEditingController();
+
+  @override
+  ToDoStateBloc? fromJson(Map<String, dynamic> json) {
+    return UpdateTask(
+      (json['tasks'] as List).map((task) => TaskModel.fromJson(task)).toList(),
+    );
+  }
+
+  @override
+  Map<String, dynamic>? toJson(ToDoStateBloc state) {
+    return {'tasks': state.tasks.map((task) => task.toJson()).toList()};
+  }
 }
