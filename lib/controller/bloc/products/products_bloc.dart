@@ -1,4 +1,4 @@
-import 'package:bloc_cubit/controller/bloc/products/products_state.dart';
+import 'package:bloc_cubit/controller/bloc/products/products_state_bloc.dart';
 import 'package:bloc_cubit/model/product_model.dart';
 import 'package:bloc_cubit/repo/product_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
