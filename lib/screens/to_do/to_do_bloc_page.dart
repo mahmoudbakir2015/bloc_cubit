@@ -1,29 +1,31 @@
-import 'package:bloc_cubit/controller/cubit/to_do/to_do_cubit.dart';
+import 'package:bloc_cubit/controller/bloc/to_do/to_do_bloc.dart';
+import 'package:bloc_cubit/controller/bloc/to_do/to_do_event.dart';
+import 'package:bloc_cubit/controller/bloc/to_do/to_do_state_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ToDo extends StatelessWidget {
-  const ToDo({super.key});
+class ToDoBlocPage extends StatelessWidget {
+  const ToDoBlocPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final toDoCubit = context.read<ToDoCubit>();
+    final toDoBloc = context.read<ToDoBloc>();
     return Scaffold(
       appBar: AppBar(title: const Text('To Do')),
-      body: BlocBuilder<ToDoCubit, ToDoState>(
+      body: BlocBuilder<ToDoBloc, ToDoStateBloc>(
         builder: (context, state) {
           return Column(
             children: [
               TextField(
-                controller: toDoCubit.taskController,
+                controller: toDoBloc.taskController,
                 decoration: InputDecoration(
                   labelText: 'Add a new task',
                   border: OutlineInputBorder(),
                 ),
                 onSubmitted: (value) {
                   if (value.isNotEmpty) {
-                    toDoCubit.addTask(value);
-                    toDoCubit.taskController.clear();
+                    toDoBloc.add(AddTaskEvent(value));
+                    toDoBloc.taskController.clear();
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
@@ -35,9 +37,10 @@ class ToDo extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  if (toDoCubit.taskController.text.isNotEmpty) {
-                    toDoCubit.addTask(toDoCubit.taskController.text);
-                    toDoCubit.taskController.clear();
+                  if (toDoBloc.taskController.text.isNotEmpty) {
+                    toDoBloc.add(AddTaskEvent(toDoBloc.taskController.text));
+                    // Clear the text field after adding the task
+                    toDoBloc.taskController.clear();
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
@@ -51,24 +54,31 @@ class ToDo extends StatelessWidget {
               Expanded(
                 child: ListView.builder(
                   physics: const BouncingScrollPhysics(),
-                  itemCount: toDoCubit.state.tasks.length,
+                  itemCount: toDoBloc.state.tasks.length,
                   itemBuilder: (context, index) {
                     // Logic to display tasks
                     return ListTile(
                       leading: Checkbox(
-                        value: toDoCubit.state.tasks[index].isCompleted,
+                        value: toDoBloc.state.tasks[index].isCompleted,
                         onChanged: (value) {
-                          toDoCubit.toggleTaskCompletion(
-                            toDoCubit.state.tasks[index].id!,
+                          toDoBloc.add(
+                            ToggleTaskCompletionEvent(
+                              toDoBloc.state.tasks[index].id!,
+                            ),
                           );
                         },
                       ),
-                      title: Text(toDoCubit.state.tasks[index].title!),
+                      title: Text(toDoBloc.state.tasks[index].title!),
                       trailing: IconButton(
                         icon: const Icon(Icons.delete),
                         onPressed: () {
-                          toDoCubit.removeTask(
-                            toDoCubit.state.tasks[index].id!,
+                          toDoBloc.add(
+                            RemoveTaskEvent(toDoBloc.state.tasks[index].id!),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Task removed successfully'),
+                            ),
                           );
                         },
                       ),

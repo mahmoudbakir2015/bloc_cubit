@@ -1,13 +1,13 @@
 import 'dart:developer';
-import 'package:bloc_cubit/controller/bloc/to_do/bloc/to_do_event.dart';
-import 'package:bloc_cubit/controller/bloc/to_do/bloc/to_do_state.dart';
+import 'package:bloc_cubit/controller/bloc/to_do/to_do_event.dart';
+import 'package:bloc_cubit/controller/bloc/to_do/to_do_state_bloc.dart';
 import 'package:bloc_cubit/model/task_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
 
-class ToDoCubit extends Bloc<ToDoEvent, ToDoStateBloc> {
-  ToDoCubit() : super(ToDoInitial()) {
+class ToDoBloc extends Bloc<ToDoEvent, ToDoStateBloc> {
+  ToDoBloc() : super(ToDoInitial()) {
     on<AddTaskEvent>((event, emit) {
       TaskModel task = TaskModel(
         title: event.title,

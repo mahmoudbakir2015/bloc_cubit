@@ -2,7 +2,7 @@ import 'package:bloc_cubit/model/product_model.dart';
 import 'package:bloc_cubit/repo/product_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'product_state.dart';
+part 'product_state_cubit.dart';
 
 class ProductCubit extends Cubit<ProductState> {
   ProductCubit() : super(ProductLoading());

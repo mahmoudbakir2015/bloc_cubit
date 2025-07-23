@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
 
-part 'to_do_state.dart';
+part 'to_do_state_cubit.dart';
 
 class ToDoCubit extends Cubit<ToDoState> {
   ToDoCubit() : super(ToDoInitial());
