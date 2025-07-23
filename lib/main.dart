@@ -1,5 +1,5 @@
 import 'dart:developer';
-import 'package:bloc_cubit/cubit/product/product_cubit.dart';
+import 'package:bloc_cubit/controller/cubit/product/product_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
